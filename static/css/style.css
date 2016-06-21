@@ -1,0 +1,38 @@
+/* ------------------ * RESET * --------------- */
+html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent;}
+article,aside,dialog,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;}
+blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
+a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent;}
+hr{display:none;height:0;border:0;borde:0;margin:0;padding:0;}
+input,select{vertical-align:middle;}
+input,button,select,textarea{outline:none}
+input,textarea{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;-o-box-sizing:border-box;box-sizing:border-box;}
+ul,li{list-style:none;}
+blockquote,q{quotes:none;}
+a{text-decoration:none;color:#000}
+a:hover{color:#05AFFF}
+h1{font-size:24px;}
+h2{font-size:20px;}
+h3{font-size:18px;}
+h4{font-size:16px;}
+h5{font-size:14px;}
+h6{font-size:12px;}
+/* ------------------ * STYLE * --------------- */
+*html,*body{height:100%;width:100%;*background-image:url(about:blank);*background-attachment:fixed}
+body{font-family:"SimSun","Microsoft YaHei","Microsoft JhengHei",Arial,PMingLiU,SimSun,sans-serif; background:#f5f5f5}
+.clear:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0;}
+
+#container{ width:900px; height:auto; background:#fff; margin:50px auto; padding:50px}
+
+#header{ width:inherit; height:80px; color:#f00; border-bottom:#ddd solid 1px}
+#header .info{float:left;}
+#header .info h3 a{ color:#000}
+#header .info p{ color:#666; font-size:12px; line-height:24px}
+
+
+#header .menu{float:right; margin-top:30px}
+#header .menu li{ float:left; margin-left:20px}
+
+
+#content{ margin-top:30px}
