@@ -30,7 +30,7 @@ body{font-family:"SimSun","Microsoft YaHei","Microsoft JhengHei",Arial,PMingLiU,
 #header{ width:inherit; height:80px; color:#f00; border-bottom:#ddd solid 1px}
 #header .info{float:left;}
 #header .info h1 a{ color:#000; font-family:"KaiTi";text-decoration:none;}
-#header .info p{ color:#666; font-size:12px; line-height:24px}
+#header .info p{ color:#666; font-size:12px; line-height:24px; margin:0}
 
 
 #header .menu{float:right; margin-top:20px}
@@ -79,3 +79,9 @@ body{font-family:"SimSun","Microsoft YaHei","Microsoft JhengHei",Arial,PMingLiU,
 #copyright{ height:50px; line-height:50px;text-align:center;font-family:"Microsoft YaHei"; font-size:12px; color:#555}
 
 #loading{ width:100px; height:20px; position:absolute; left:50%; margin-left:-50px; top:15px; background:url(../images/loading.gif); overflow:hidden; opacity:0.3;filter:alpha(opacity=30)}
+
+
+.page{ margin:25px 0; border-bottom:#ddd solid 1px; padding-bottom:20px}
+.page h3{ margin:10px 0}
+
+p{font-size:14px;font-family:Arial,sans-serif; line-height:24px; color:#444;margin:0 0 20px 0}
