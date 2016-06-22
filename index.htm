@@ -193,7 +193,31 @@
 <div id="copyright"> Copyright © <a href="#">意思集</a> - Hosted on <a href="#">GitHub Pages</a> & Powered by <a href="#">Hexo</a> & Theme by <a href="#">Anuny</a> </div>
 <script src="static/js/sujui.js"></script> 
 <script src="static/js/dom.js" type="text/javascript"></script> 
+<script src="static/js/json2.js" type="text/javascript"></script> 
+<script src="static/js/ajax.js" type="text/javascript"></script> 
 <script>
+define('statistics::data',function(){
+	var config={
+		"appkey":"test.com",
+		'hit':[{"uid":"test.com","path":"/2016/06/21/test-hello/","title":"test/hello"},{"uid":"cipp6k346000260ej9qi3bfqk","path":"/2016/06/21/test-hello/","title":"test/hello"}],
+		'view':[{"uid":"cipp6k346000260ej9qi3bfqk","path":"/2016/06/21/test-hello/","title":"test/hello"},{"uid":"cipp6k34l000460ejc3i9sp1a","path":"/2016/06/21/text/","title":"text"}]
+	}
+	return config;
+})
+
+
+
+require(['statistics::data','extend::ajax','extend::json2'],function(datas,ajax,json2){
+	ajax({
+		type:'POST',
+		url:'http://localhost/blog_api/api.php?controller=stat',
+		data:datas,
+		success:function(response){
+			console.log( json2.parse(response))
+		},
+		error:function(){}
+	})	
+})
 </script>
 </body>
 </html>
