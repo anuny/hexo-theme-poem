@@ -1,108 +1,177 @@
 define('plugins::highlight',function() {
-	var highlight = function(options) {
-		return new highlight.fn.init( options)
-	};
-	
-	var generic={
-		comment: '(\\/\\/.*|\\/\\*[\\s\\S]*?\\*\\/)|',
-		number: '(?:[^\\W\\d]|\\$)[\\$\\w]*|(0[xX][0-9a-fA-F]+|\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?|\\.\\d+(?:[eE][+-]?\\d+)?)|'
+	JSHL.language = JSHL.language || {};
+	/**
+	 * 扩展语言
+	 * @param {String} langName 语言名称
+	 * @param {Object} langObj  配置参数
+	 */
+	JSHL.extendLanguage = function(langName, langObj){
+		JSHL.language[langName] = langObj;
+		if(langObj.wrapper){
+			JSHL.language[langObj.wrapper].include.push(langObj.content);
+		}
+		JSHL(langName);
 	}
-
-	highlight.fn = highlight.prototype = {
-		constructor: highlight,
-		init: function(options) {
-			this.setting = {
-				style: options.style ||'light',
-				//language: options.language ||'javascript'
-			};
-			
-			//this.element = options.element;
-			//var code = this.element.innerHTML;
-			//this.code = this.preg(code);
-			//this.element.innerHTML = this.code;
-			
-			var elements = document.getElementsByTagName('pre');
-			for(var i=0,len=elements.length;i<len;i++){
-				var element = elements[i];
-				var language = element.getAttribute('language');
-				var code = element.innerHTML;
-				code = this.preg(language,code);
-				element.innerHTML = code;
-			}
-		},
-		'language':{
-			'javascript':{
-				comment: generic.comment,
-				bracket: '(\\[|\\]|\\{|\\}|\\(|\\))|',
-				symbol: '(\\+|\\-|\\*|\\/|\\%|\\=|\\==|\\===|\\!=|\\!==|\\&=|\\*=|\\+=|\\-=|\\<=|\\>=|\\&lt;|\\&gt;|\\?|\\.|\\&amp;|\\|)|',
-				string: '("(?:[^"\\\\]|\\\\[\\s\\S])*"|\'(?:[^\'\\\\]|\\\\[\\s\\S])*\')|',
-				root: '\\b(alert|all|anchor|anchors|area|assign|blur|button|checkbox|clearInterval|clearTimeout|clientInformation|close|closed|confirm|constructor|crypto|defaultStatus|document|element|elements|embed|embeds|event|fileUpload|focus|frame|innerHeight|innerWidth|link|location|mimeTypes|navigate|navigator|frames|frameRate|hidden|history|image|images|offscreenBuffering|open|opener|option|options|outerHeight|outerWidth|onblur|onclick|onerror|onfocus|onkeydown|onkeypress|onkeyup|onmouseover|onload|onmouseup|onmousedown|onsubmit|packages|pageXOffset|pageYOffset|parent|password|pkcs11|plugin|prompt|propertyIsEnum|radio|screenX|screenY|scroll|secure|self|status|submit|setTimeout|setInterval|taint|text|textarea|top|window)\\b|',
-				object:'\\b(Array|apply|Boolean|concat|call|cos|charAt|Date|decodeURI|decodeURIComponent|eval|encodeURI|encodeURIComponent|escape|fixed|getTime|hasOwnProperty|Infinity|indexOf|isFinite|isNaN|isPrototypeOf|join|log|lastIndexOf|Math|match|max|min|Number|Object|push|pop|print|prototype|parseFloat|parseInt|RegExp|reset|replace|String|substring|substr|sub|sup|slice|sort|shift|search|slice|splice|split|select|toString|toLowerCase|toUpperCase|toSource|unshift|unescape|untaint|valueOf|write|writeln)\\b|',
-				keyword:'\\b(abstract|boolean|break|byte|case|catch|char|class|const|continue|debugger|default|delete|do|double|else|enum|export|extends|foreach|final|finally|float|for|from|function|false|goto|if|implements|import|in|instanceof|int|interface|let|long|native|NaN|new|null|of|package|private|protected|public|return|short|static|super|switch|synchronized|this|throw|true|throws|transient|try|typeof|var|void|volatile|while|with)\\b|',
-				number: generic.number,			
-				regexp: '(?:^|[^\\)\\]\\}])(\\/(?!\\*)(?:\\.|[^\\\/\n])+?\\/[gim]*)|'	
-			},
-			css: {
-				comment: generic.comment,
-				keyword: '(\\\@\\\w+|\\\:?\\\:\\\w+|[a-z\\\-]+\\\:)|',
-				symbol: '(\\;|\\:|\\{|\\})|',
-			},
-			html: {
-				comment: generic.comment,
-				keyword: '(\\\&lt\\\;\\\/?\\\w(.|\n)*?\/?\\\&gt\\\;)|',
-				css: '(?:\\\&lt;style.*?\\\&gt;)([\\\s\\\S]+?)(?:\\\&lt;\\\/style\\\&gt;)|',
-				script: '(?:\\\&lt;script.*?\\\&gt;)([\\\s\\\S]+?)(?:\\\&lt;\\\/script\\\&gt;)|'
-			}
-
 	
+
+	function JSHL(langName){
+		var pres = document.getElementsByTagName('pre'),
+			len = pres.length,
+			pre = null,
+			index = 0,
+			lang = 'javascript',
+			html,outer;
+	
+		/**
+		 * 转义html字符
+		 * @param {String} html 要转义的html代码
+		 * @returns {String} 转义后的html字符串
+		 */
+		function parseHTML(html){
+			return html.replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/(\r?\n)$/g,'');
+		}
+	
+		/**
+		 * 添加行号
+		 * @param {Number} nums 行数
+		 * @returns {string}
+		 */
+		function addLineNumber(nums){
+			var html = ['<div class="','jshl-linenum','">'], i=1;
+			for(; i< nums; i+=1) html.push(i+'.<br/>');
+			html.push(nums,'.</div>');
+			return html.join('')
+		}
+		/**
+		 * 根据语言高亮代码
+		 * @param {String} html
+		 * @param {String} lang
+		 * @param {Boolean} findParent
+		 * @returns {*}
+		 */
+		function hlbylanguage(html, lang, findParent){
+			//var ln = addLineNumber(html.split('\n').length);
+	
+			if(!(lang in JSHL.language)){
+				return html + (findParent ? addLineNumber(html.split('\n').length) : '')
+			}
+	  
+			var l = JSHL.language[lang];
 			
-		},
-		
-		
-		preg: function(lan,code) {
-			var types=[];
+			if(findParent && l.wrapper) l = JSHL.language[l.wrapper];
+			
+			if(!l) return html + (findParent ? addLineNumber(html.split('\n').length) : '')
+			html = ' '+html+' ';
+	
+			var ln = /(&lt;div class="?jshl-linenum"?&gt;(?:.*?)&lt;\/div&gt;)/ig;
+	
+			if(ln.test(html)){ //已经加入了行号
+				html = html.replace(ln,'X@line@X');
+			}
+			
+			var //start = new Date(),
+				pattern = l.reg,
+				markup = l.markup,
+				cls = l.cls || [],
+				defaultCls = (cls.length === 0),
+				inc = l.include,
+				olanghl=[],placeholder=[],pl='',wrapper;
+	
+	 
+			
 			var language = '';
-			var languages = highlight.fn.language[lan];
-			if(!languages)return code;
-			for(var type in languages){
-				language +=languages[type];
-				types.push(type);
+			
+			
+			
+			for(var type in pattern){
+				language +=pattern[type];
+				defaultCls && cls.push(type);
 			};
-			code = code.replace(/\r\n|[\r\n]/g, "\n").replace(/^\s+|\s+$/g, "");
-			var regExp = new RegExp(language, 'g');
-			console.log(regExp)
-			code = code.replace(regExp, function(code) {
-				var codes;
-				for (var i = 1; i <= types.length; i++) {
-					if (codes = arguments[i]) {
-						codes = htmlEncode(codes);
-						return '<span class="'+types[i-1]+'">' + codes + '</span>';
-					}
-				};
-				return htmlEncode(arguments[0]);
-			});
-			return code;
-			function htmlEncode(str) {
-				var i, s = {
-						// "&amp;": /&/g,
-						"&quot;": /"/g,
-						"&#039;": /'/g,
-						"&lt;": /</g,
-						"&gt;": />/g,
-						"<br>": /\n/g
-						// "&nbsp;": / /g, // pre 标签不需要替换空格
-					};
-				for (i in s) {
-					if(str!==''){
-						
-						str = str.replace(s[i], i);
-					}
+			
+			
+				
+				
+			
+			pattern = new RegExp(language,'g');
+	
+			//提取其他语言的代码
+			if(inc && inc.length > 0){
+				
+				for(i=0; i< inc.length; i+=1){
+					wrapper = new RegExp(inc[i].wrapper.replace(/</g,'&lt;').replace(/>/g,'&gt;'),'gi');
 					
-				};
-				return str;
+					html = html.replace(wrapper,function($0,$1){
+						pl = 'X@'+Math.random()+'@X';
+						placeholder.push(pl);
+						olanghl.push(hlbylanguage($1,inc[i].lang, false))
+						return $0.replace($1,pl);
+					});
+				}
+			}
+			
+			
+			
+			html = html.replace(pattern,function(){
+				var args = Array.prototype.slice.call(arguments,0),
+					currArg1 = null,
+					currArg = null,
+					len = args.length - 2,
+					index = len;
+					
+				for(; index > 0; index-=1){
+					currArg = args[index];
+					
+					if(currArg){
+						
+						if(markup && cls[index-1] === 'html-tag'){
+							currArg1 = currArg.replace(/(\w+)=(".*?")/g,'<span class="'+JSHL.language.html.cls[2]+'">$1</span>=<span class="'+JSHL.language.html.cls[3]+'">$2</span>')
+						}
+						args[0] = args[0].replace(currArg,'<span class="'+cls[index-1]+'">'+(currArg1 !== null ?currArg1:currArg)+'</span>')
+					}
+				}
+				return args[0];
+			});
+			
+			
+			//高亮包含的其他语言
+			placeholderLen = placeholder.length;
+			if(placeholderLen>0){
+				for(i=0; i< placeholderLen; i++){
+					
+					html = html.replace(new RegExp('X@.*?'+placeholder[i].replace(/[{@}]/g,'')+'.*?@X','g'),placeholder[i]).replace(placeholder[i], olanghl[i]);
+					console.log(html)
+				}
+			}
+	
+			/*
+			 * 替换css第一行首多出一个空格的bug
+			 * 感谢"落单的孤鸟"反馈
+			 */
+			function rep($0){
+				return /^\s+$/.test($0) ? "" : $0.replace(/(\s+)$/,"")
+			}
+			
+			return html.replace(/^(\<.*?\>)*(\s)|(\s)$/g,rep).replace('X@line@X','') + (findParent ? addLineNumber(html.split('\n').length) : '');
+		}
+	
+		for(; index < len; index += 1){
+			pre = pres[index];
+			lang = (pre.getAttribute('data-language') || lang).toLowerCase();
+			
+			if(typeof langName !== 'undefined' && lang !== langName){
+				continue
+			}
+			
+			html = parseHTML(pre.innerHTML);
+	
+			if(pre.outerHTML){
+				outer = pre.outerHTML.match(/<\w+\s*(.*?)>/)[1];
+				pre.outerHTML = '<pre '+outer+'>'+ hlbylanguage(html,lang,true) + '</pre>';
+			}else{
+				pre.innerHTML = hlbylanguage(html,lang,true);
 			}
 		}
 	};
-	highlight.fn.init.prototype = highlight.fn;
-	return highlight;
+	JSHL();
+	return JSHL;
 });
