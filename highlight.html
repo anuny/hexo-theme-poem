@@ -3,58 +3,13 @@
 <head>
 <meta charset="utf-8">
 <title>无标题文档</title>
-<style>
-*{margin:0;padding:0;border:0;}
-body{font:14px/16px Consolas,Microsoft YaHei;border-top:solid 5px #A04334;background-color:#fff;line-height:18px}
+<link rel="stylesheet" href="static/css/light.css" />
 
-[data-language]:before{font-style: italic;font-size: 45px;float: right;margin-top: 10px;color: goldenrod;z-index: -1;opacity: 0.3;filter:alpha(opacity=30);}
-[data-language="javascript"]:before{content: "JavaScript";}
-[data-language="html"]:before{content: "html";}
-[data-language="css"]:before{content: "css";}
-[data-language="php"]:before{content: "php";}
-	
-pre{font-family:Monaco,Consolas,"Lucida Console","Courier New",serif;font-size:14px;line-height:20px;padding:10px 10px 10px 42px;margin:10px;border:1px #CCC solid;background:#FFFFFF;color:#000066;position: relative;white-space:pre-wrap;word-wrap:break-word;*padding-bottom: 20px;}
-.jshl-linenum{position: absolute;z-index: 0;left: 0;_left:-42px;top: 10px;_top:9px; line-height:inherit;width: 32px;border-right:2px #00B418 solid;padding-right:2px; text-align:right;}
-
-/*==js styles==*/
-.com{ color:#999 }
-.doc{ color:#999 }
-.js-str{ color:#00f }
-.js-bui{ color:#909 }
-.js-key{ color:#009; font-weight: bold }
-.js-obj{ color:#099 }
-.js-num{ color:#f00 }
-.js-ope{ color:#009 }
-.js-brt{ color:#000099;font-weight:bold;}
-.js-reg{ color:#006600;}
-
-/*==html styles==*/
-.html-tag{ color:#009 }
-.html-attr{ color:#FF6400 }
-.html-val{ color:#00f }
-
-/*==css styles==*/
-.css-selector{color:#f0f }
-.css-attr{color:#009 }
-.css-val{color:#00f }
-.css-brt{color:#f0f }
-
-.php-mrk{ color: red; font-weight: bold; }
-.php-str{ color: #c00; }
-.php-fun{ color: #00f; font-weight: bold; }
-.php-key{ color: #00f; }
-.php-var{ color: #06f; }
-.php-obj{ color: #060; }
-.php-num{ color: #f00; }
-.php-bol{ color: #F92665}
-.php-ope{ color: #00f;}
-
-</style>
 
 </head>
 
 <body>
-<!--<pre data-language="javascript">
+<pre data-language="javascript">
 &lt;script&gt;
 //var test = document.getElementById('test');
 
@@ -69,7 +24,7 @@ highlight({
 
 + - * / % = == === != !== &= *= += -= &lt;= &gt;= [ ] &lt; &gt; ? . &amp; { } ( )
 
-
+Array
 
 /((\'.*?\')|(\".*?\"))/g
 123
@@ -89,7 +44,7 @@ require('plugins::highlight',function(highlight){
 &lt;/script&gt;
 </pre>
 
-<pre data-language="css" class="css">
+<pre data-language="css">
 * {
 	margin:0;
 	padding:0;
@@ -153,16 +108,32 @@ pre.css {
 	font-weight:bold;
     !important
 }	
-</pre>-->
+</pre>
 
 <pre  data-language="html">
+&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;title&gt;无标题文档&lt;/title&gt;
+&lt;link rel="stylesheet" href="test.css" /&gt;
+&lt;script src="test.js"&gt;&lt;/script&gt;
+&lt;style&gt;
+.demo{ font-size:14px}
+&lt;/style&gt;
 &lt;script&gt;
 var test = function(){
 	alert(1)
 }
 &lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;div class="test"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
 </pre>
-<!--<pre data-language="php">
+<pre data-language="php">
 &lt;?php
     /**
      * 发送电子邮件
@@ -211,13 +182,14 @@ function do_upload($upload_dir,$upload_url)
     echo "end";
 }
 ?&gt;
-</pre>-->
+</pre>
 <script src="static/js/sujui.js" ></script> 
 <script src="static/js/highlight.js" ></script>
 <script src="static/js/highlight-language.js" ></script>
 <script>
-require(['plugins::highlight','plugins::highlight-language'],function(highlight,language){
-	for(var lan in language)highlight.extendLanguage(lan,language[lan])
+// 代码高亮
+require(['plugins::highlight','plugins::highlight=>language'],function(highlight,language){
+	highlight(language,'light')
 })
 </script>
 </body>

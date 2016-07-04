@@ -1,4 +1,4 @@
-define('plugins::highlight-language',function() {
+define('plugins::highlight=>language',function() {
 	var language={};
 	language.html={
 		cls : ['com','html-tag','html-attr','html-val'],
@@ -31,7 +31,7 @@ define('plugins::highlight-language',function() {
 	}
 	
 	
-	language.javascript={
+	language.javascript=language.js={
 		//文档注释 --> 普通注释 --> 字符串 --> 关键字--> 变量 --> 内置对象-->数字-->boolean-->操作符
 		cls : ['doc','com','js-str','js-bui','js-key','js-obj','js-num','js-ope','js-brt','js-reg'],
 		reg :{
@@ -50,16 +50,17 @@ define('plugins::highlight-language',function() {
 			//数字
 			'num' : '(?:[^\\W\\d]|\\$)[\\$\\w]*|(0[xX][0-9a-fA-F]+|\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?|\\.\\d+(?:[eE][+-]?\\d+)?)|', 
 			//操作符 
-			'ope' : '(\\+|\\-|\\*|\\/|\\%|\\=|\\==|\\===|\\!=|\\!==|\\&=|\\*=|\\+=|\\-=|\\<=|\\>=|\\&lt;|\\&gt;|\\?|\\.|\\&amp;|\\|)|',  
+			'ope' : '(\\+|\\-|\\*|\\/|\\%|\\=|\\==|\\===|\\!=|\\!==|\\&=|\\*=|\\+=|\\-=|\\<=|\\>=|\\&lt;|\\&gt;|\\?|\\.|\\,|\\;|\\~|\\`|\\!|\\:|\\^|\\"|\'|\\&amp;|\\|)|',  
 			'brt': '(\\[|\\]|\\{|\\}|\\(|\\))|',
 			//正则表达式
 			'reg': '(?:^|[^\\)\\]\\}])(\\/(?!\\*)(?:\\.|[^\\\/\n])+?\\/[gim]*)|'
 		}
 	}
+
 	
 	language.php={
 			//对应的类名称
-		cls : ['com','php-mrk','php-str','php-fun','php-key','php-var','php-obj','php-num','php-ope'],
+		cls : ['com','php-mrk','php-str','php-fun','php-key','php-var','php-obj','php-num','php-ope','php-brt'],
 		//相应的正则表达式
 		reg : {
 			'com' : '(\\\/\\\*[\\\s\\\S]*?\\\*\\\/|\\\/\\\/.*|&lt;\\\!--[\\\s\\\S]*?--&gt;)|',  //普通注释
@@ -70,7 +71,8 @@ define('plugins::highlight-language',function() {
 			'var' : '(\\\$[\\\w][\\\w\\\d]*)|', //变量名
 			'obj' : '(?:[^$_@A-Za-z0-9])?(array|as|break|case|class|const|continue|default|die|do|echo|else|elseif|empty|endif|exit|extends|for|foreach|global|if|include|include_once|isset|list|new|print|require|require_once|return|static|switch|unset|use|var|while|final|interface|implements|public|private|protected|abstract|clone|try|catch|throw|int|string|bool|classic|object)(?:[^$_@A-Za-z0-9])|', //内置函数(部分)
 			'num' : '\\b(\\\d+(?:\\\.\\\d+)?(?:[Ee][-+]?(?:\\\d)+)?)\\b|',  //数字
-			'ope' : '(==|=|===|\\+|-|\\+=|-=|\\*=|\\=|%=|&lt;|&lt;=|&gt;|&gt;=|\\.)|'  //操作符
+			'ope' : '(\\+|\\-|\\*|\\/|\\%|\\=|\\==|\\===|\\!=|\\!==|\\&=|\\*=|\\+=|\\-=|\\<=|\\>=|\\&lt;|\\&gt;|\\?|\\.|\\,|\\;|\\~|\\`|\\!|\\:|\\^|\\"|\'|\\&amp;|\\|)|',
+			'brt': '(\\[|\\]|\\{|\\}|\\(|\\))|'
 		},
 		//父级语言
 		wrapper: 'html',
