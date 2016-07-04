@@ -1,9 +1,9 @@
 /* ------------------ * RESET * --------------- */
 html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}
-html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent;}
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;vertical-align:baseline;background:transparent; font-size:100%}
 article,aside,dialog,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;}
 blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
-a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent;}
+a{margin:0;padding:0;vertical-align:baseline;background:transparent;}
 hr{display:none;height:0;border:0;borde:0;margin:0;padding:0;}
 input,select{vertical-align:middle;}
 input,button,select,textarea{outline:none}
@@ -22,15 +22,19 @@ h5{font-size:16px;}
 h6{font-size:14px;}
 /* ------------------ * STYLE * --------------- */
 *html,*body{height:100%;width:100%;*background-image:url(about:blank);*background-attachment:fixed}
-body{font-family:"SimSun","Microsoft YaHei","Microsoft JhengHei",Arial,PMingLiU,SimSun,sans-serif; background:#f2f2f2}
+body{    font-family: 'STHeiti Light','SimSun','Microsoft YaHei',Helvetica,Arial,sans-serif; background:#f2f2f2}
 .clear:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0;}
+
+
+
+
 
 #container{ width:900px; height:auto; background:#fff; margin:50px auto 0 auto; padding:50px;box-shadow: 0 2px 6px rgba(100, 100, 100, 0.05);}
 
 #header{ width:inherit; height:80px; color:#f00; border-bottom:#ddd solid 1px}
 #header .info{float:left;}
-#header .info h1 a{ color:#000; font-family:"KaiTi";text-decoration:none;}
-#header .info p{ color:#666; font-size:12px; line-height:24px; margin:0}
+#header .info h1 a{ color:#000; text-decoration:none;}
+#header .info p{ color:#666; font-size:0.12rem; line-height:24px; margin:0}
 
 
 #header .menu{float:right; margin-top:20px}
@@ -40,23 +44,39 @@ body{font-family:"SimSun","Microsoft YaHei","Microsoft JhengHei",Arial,PMingLiU,
 
 #content{ margin-top:20px}
 
+<<<<<<< .mine
+.article-list li{ width:900px; overflow:hidden; border-bottom:#ccc dashed 1px; margin:20px 0; padding-bottom:40px; display:block; float:left }
+.article-list .list-con{ width:750px; overflow:hidden;float:left}
+.article-list .list-pic{ width:100px; height:100px; background:#f2f2f2; float:right;margin-top:40px;border-radius:50%; overflow:hidden}
+.article-list .list-pic img{border-radius:50%; width:100px; height:100px;}
+||||||| .r5
+.article-list li{ width:900px; height:220px; overflow:hidden; border-bottom:#ccc dashed 1px; margin:20px 0; padding-bottom:10px; display:block; float:left }
+.article-list .list-con{ width:750px; height:180px; overflow:hidden;float:left}
+.article-list .list-pic{ width:100px; height:100px; background:#000; float:right; border-radius:50%; margin-top:40px; overflow:hidden}
+=======
 .article-list li{ width:900px; overflow:hidden; border-bottom:#ccc dashed 1px; display:block; float:left; margin:10px 0; padding:10px 0}
 .article-list .list-con{ width:750px; overflow:hidden;float:left}
 .article-list .list-pic{ width:100px; height:100px; background:#000; float:right; border-radius:50%; margin-top:40px; overflow:hidden}
+>>>>>>> .r7
 
 
 
-
-.article-list li h3{ font-family:"KaiTi"}
+.article-list li h3{ font-weight:400 }
 .article-list li h3 a{ color:#000;text-decoration:none;}
-.article-list li h3 a:hover{ color:#076ea8}
+.article-list li h3 a:hover{ color:#000}
 
 .article-list li .info{ font-size:12px; margin:10px 0}
 .article-list li .info span{ margin-right:10px; color:#999}
 .article-list li .info span i{ font-style:normal; }
 
 
+<<<<<<< .mine
+.article-list li .con{  overflow:hidden; margin:5px 0;font-size:14px; line-height:24px; color:#555}
+||||||| .r5
+.article-list li .con{ height:120px;  overflow:hidden; margin:5px 0;font-size:14px;font-family:'SimSun'; line-height:24px; color:#555}
+=======
 .article-list li .con{overflow:hidden; margin:5px 0;font-size:14px;font-family:'SimSun'; line-height:24px; color:#555}
+>>>>>>> .r7
 .article-list li .con p{ margin:5px 0}
 
 
@@ -78,10 +98,48 @@ body{font-family:"SimSun","Microsoft YaHei","Microsoft JhengHei",Arial,PMingLiU,
 
 #copyright{ height:50px; line-height:50px;text-align:center;font-family:"Microsoft YaHei"; font-size:12px; color:#555}
 
-#loading{ width:100px; height:20px; position:absolute; left:50%; margin-left:-50px; top:15px; background:url(../images/loading.gif); overflow:hidden; opacity:0.3;filter:alpha(opacity=30)}
+#loading{ width:100px; height:20px; position:absolute; left:50%; margin-left:-50px; top:15px; background:url(../images/loading.gif); overflow:hidden; opacity:0.3;filter:alpha(opacity=30); display:none}
 
 
 .page{ margin:25px 0; border-bottom:#ddd solid 1px; padding-bottom:20px}
 .page h3{ margin:10px 0}
 
-p{font-size:14px;font-family:Arial,sans-serif; line-height:24px; color:#444;margin:0 0 20px 0}
+p{font-size:14px; line-height:24px; color:#444;margin:0 0 20px 0}
+
+
+.archives .category{ width:100px;font-size:0.1rem; float:left;}
+.archives .category li{ margin:10px 0}
+.archives .tag{width:460px;float:left; margin-left:20px}
+.archives .tag a{  display: inline-block;margin: 10px;word-wrap: break-word;text-align: center;}
+.archives .tag a.f1{ font-size:10px}
+.archives .tag a.f2{ font-size:12px}
+.archives .tag a.f3{ font-size:14px}
+.archives .tag a.f4{ font-size:16px}
+.archives .tag a.f5{ font-size:18px}
+.archives .tag a.f6{ font-size:19px}
+.archives .tag a.f7{ font-size:20px}
+.archives .tag a.f8{ font-size:21px}
+.archives .tag a.f9{ font-size:22px}
+.archives .tag a.f10{ font-size:24px}
+
+
+
+.archives .archive{ width:300px;float:right;margin-left:20px; font-size:14px;}
+.archives .archive ul{ margin:10px 0 0 20px}
+.archives .archive li{ margin:10px 0}
+
+@media screen and (max-width:1023px){
+	#container{ width:80%; height:auto; background:#fff; margin:5%; padding:5%; box-shadow:none; overflow:hidden}
+	.article-list li{ width: inherit; height: auto; border-bottom:#ccc dashed 1px; margin:20px 0; padding-bottom:10px; display:block; float:left }
+	.article-list .list-con{ width:inherit; height:auto; overflow:hidden;float:left}
+	.article-list .list-pic{ display:none}
+}
+@media screen and (max-width:768px){
+      /*不大于768px的设备尺寸中 响应式布局的特定样式*/
+}
+@media screen and (max-width:360px){
+    
+}
+@media screen and (max-width:320px){
+    
+}
