@@ -38,10 +38,10 @@ body{font-family:"SimSun","Microsoft YaHei","Microsoft JhengHei",Arial,PMingLiU,
 #header .menu li a{ text-decoration:none}
 #header .menu li a.current{ color:#076ea8; font-weight:bold}
 
-#content{ margin-top:30px;}
+#content{ margin-top:20px}
 
-.article-list li{ width:900px; height:220px; overflow:hidden; border-bottom:#ccc dashed 1px; margin:20px 0; padding-bottom:10px; display:block; float:left }
-.article-list .list-con{ width:750px; height:180px; overflow:hidden;float:left}
+.article-list li{ width:900px; overflow:hidden; border-bottom:#ccc dashed 1px; display:block; float:left; margin:10px 0; padding:10px 0}
+.article-list .list-con{ width:750px; overflow:hidden;float:left}
 .article-list .list-pic{ width:100px; height:100px; background:#000; float:right; border-radius:50%; margin-top:40px; overflow:hidden}
 
 
@@ -56,7 +56,7 @@ body{font-family:"SimSun","Microsoft YaHei","Microsoft JhengHei",Arial,PMingLiU,
 .article-list li .info span i{ font-style:normal; }
 
 
-.article-list li .con{ height:120px;  overflow:hidden; margin:5px 0;font-size:14px;font-family:'SimSun'; line-height:24px; color:#555}
+.article-list li .con{overflow:hidden; margin:5px 0;font-size:14px;font-family:'SimSun'; line-height:24px; color:#555}
 .article-list li .con p{ margin:5px 0}
 
 
