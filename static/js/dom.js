@@ -36,6 +36,21 @@ define("extend::dom",function() {
 				(ele && ele.handlerMap && ele.handlerMap[eventType]) && off(ele,eventType)
 			})
 		},
+		getData:function(){
+			var This = this;
+			var tags = ['input','textarea']
+			var data = {}
+			each(tags,function(i,tag){
+				var ele = This.find(tag)
+				ele.each(function(){
+					var name=dom(this).attr('name');
+					if(name!==''){
+						data[name]=dom(this).val()
+					}
+				})
+			})
+			return data;
+		},
 		find: function(selector) {
 			var ele = [];
 			this.each(function(i, _ele) {

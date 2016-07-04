@@ -3,7 +3,23 @@
 <head>
 <meta charset="utf-8">
 <title>无标题文档</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link rel="stylesheet" type="text/css" href="static/css/style.css" />
+<script>
+	(function(win, doc) {
+		var docEl = doc.documentElement,
+		resizeEvt = 'orientationchange' in win ? 'orientationchange': 'resize',
+		recalc = function() {
+			var clientWidth = docEl.clientWidth;
+			if (!clientWidth) return;
+			docEl.style.fontSize=10 * (clientWidth / 320)+'px';
+		};
+		if (!doc.addEventListener) return;
+		win.addEventListener(resizeEvt, recalc, false);
+		doc.addEventListener('DOMContentLoaded', recalc, false)
+	})(window, document);
+</script>
+
 </head>
 <body>
 <div id="container">
@@ -25,6 +41,21 @@
         <h3>关于自己</h3><p>本名杨飞，贵州人士，弱冠之年。六尺男儿，炎黄子孙。<br />资深80后巨蟹男，嗜酒、好色、伪诗人，天朝基层群众。<br />沉默寡言，时而悲观，时而疯癫，内心矛盾不断又不断。<br />骨子里是个农民，皮肉中有点小资，表面上又像个书生。<br /></p><p>命犯桃花&mdash;曾经有万千少女跟随左右，但至今仍是单身。<br />文艺青年&mdash;本是出类拔萃的理科生，后来“弃理从文”当了七年的伪文青。<br />造化弄人&mdash;从理科到文科，从文学到美术，如今又干上了编程，沉溺于函数与代码之中。<br />怀旧情结&mdash;到现在还固执的认为，我的那些前女友们仍旧是世上最美丽的女人！<br />神经病人&mdash;先天轻度抑郁症患者，后来自学心理学给自己治病，如今已是奔放豪情！<br />北斗七星&mdash;全身只有七颗痣，从头顶到大腿根部，排成北斗七星阵，难道是是真龙附身？<br />核&nbsp; 动&nbsp; 力&mdash;虽然不是虎背熊腰，但鄙人的心、肝、肾、脾、胃、肺 ，拥有着无尽的核动力。<br />色而不淫&mdash;生活极度随意，但绝不滥情，从不跨越那片迷人的红灯区。<br />生日醉鬼&mdash;白酒爱好者，每年会在生日聚会上喝到吐血、住院、醉TM三天三夜！<br />终极梦想&mdash;<s>愿世界和平、我爱你、你爱他、他爱我、我们大家都有爱 ( ^_^ )&nbsp; </s></p><h3>关于博客</h3><p>意思集-自豪的采用typecho系统，页面为黑白两栏风格，其目的是为了记录生活，分享与交流。记录自己的“意”与“思”，分享那些有“意思”的东西。</p>
     </div>
   </div>
+  <form id="addCommentForm" method="post" action="api.php?controller=comment"  onsubmit="return false">
+  <div>
+    <label for="pid">pid</label>
+    <input type="text" name="pid" id="pid" value="cipp6k346000260ej9qi3bfqk"/>
+    <label for="name">昵称</label>
+    <input type="text" name="name" id="name" value="张三"/>
+    <label for="email">Email</label>
+    <input type="text" name="email" id="email" value="test@ddd.com"/>
+    <label for="url">网站</label>
+    <input type="text" name="url" id="url" value="http://baidu.com"/>
+    <label for="content">评论内容</label>
+    <textarea name="content" id="content" cols="20" rows="5">内容测试</textarea>
+    <input type="submit" id="submit" value="Submit" />
+  </div>
+</form>
   <div id="footer">
     <div class="side clear">
       <div class="side-1">
@@ -97,27 +128,48 @@
 <script src="static/js/json2.js" type="text/javascript"></script> 
 <script src="static/js/ajax.js" type="text/javascript"></script> 
 <script>
+
 define('statistics::data',function(){
 	var config={
 		"appkey":"test.com",
 		'hit':[{"uid":"test.com","path":"/2016/06/21/test-hello/","title":"test/hello"},{"uid":"cipp6k346000260ej9qi3bfqk","path":"/2016/06/21/test-hello/","title":"test/hello"}],
-		'view':[{"uid":"cipp6k346000260ej9qi3bfqk","path":"/2016/06/21/test-hello/","title":"test/hello"},{"uid":"cipp6k34l000460ejc3i9sp1a","path":"/2016/06/21/text/","title":"text"}]
+		'view':[{"uid":"cipp6k346000260ej9qi3bfqk","path":"/2016/06/21/test-hello/","title":"test/hello"},{"uid":"cipp6k34l000460ejc3i9sp1a","path":"/2016/06/21/text/","title":"text"}],
+		'comment':[{"uid":"cipp6k346000260ej9qi3bfqk","path":"/2016/06/21/test-hello/","title":"test/hello"}]
 	}
 	return config;
 })
 
-
-
+// 获取页面统计
 require(['statistics::data','extend::ajax','extend::json2'],function(datas,ajax,json2){
 	ajax({
 		type:'POST',
-		url:'http://localhost/blog_api/api.php?controller=stat',
+		url:'http://api.yesji.com/?controller=stat',
 		data:datas,
+		jsonp:'jsonp',
 		success:function(response){
 			console.log( json2.parse(response))
 		},
 		error:function(){}
-	})	
+	});
+	
+})
+
+// 提交评论
+require(['extend::dom','extend::ajax','extend::json2'],function($,ajax,json2){
+	var form = $('#addCommentForm');
+	form.on('submit',function(){
+		ajax({
+			type:'POST',
+			url:'http://localhost/blog_api/api.php?controller=comment',
+			data:form.getData(),
+			success:function(response){
+				console.log( json2.parse(response))
+			},
+			error:function(){}
+		});
+	})
+	
+	
 })
 </script>
 </body>
