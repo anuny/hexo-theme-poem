@@ -1,0 +1,177 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{margin:0;padding:0;border:0;}
+body{font:14px/16px Consolas,Microsoft YaHei;border-top:solid 5px #A04334;background-color:#fff;line-height:18px}
+pre{white-space:pre-wrap;word-wrap:break-word;padding:20px; font-family:Consolas,Microsoft YaHei;}
+pre.css{ color:#f0f}
+.root{color:#AB00BC}
+.comment {color:#999} /* 注释 */
+.string {color:#000099} /* 字符串 */
+.keyword {color:#000099;font-weight:bold} /* 关键词 */
+.object {color:#009999} /* 内置对象 */
+.number {color:#f00;} /* 数字 */
+.regexp {color:#006600;} /* 正则 */
+.symbol{ color:#000099;}
+.bracket{ font-weight:bold;color:#000099;}
+
+.selector{ color:#FF3AFF}
+.important{ color:#f00; font-weight:bold;}
+	
+</style>
+
+</head>
+
+<body>
+<pre language="javascript">
+&lt;script&gt;
+//var test = document.getElementById('test');
+
+/*
+highlight({
+	element:test,
+	style:'light',
+	font:'font-size:14px; font-family:Consolas,Microsoft YaHei ',
+	language:'javascript'
+})
+*/
+	
+abstract|break|byte|case|catch|char|class|const|continue|debugger|default|delete|do|double|else|enum|export|extends|foreach|final|finally|float|for|from|function|false|goto|if|implements|import|in|instanceof|int|interface|let|long|native|NaN|new|null|of|package|private|protected|public|return|short|static|super|switch|synchronized|this|throw|true|throws|transient|try|typeof|var|void|volatile|while|with
+
+Array|apply|Boolean|concat|call|cos|charAt|Date|decodeURI|decodeURIComponent|eval|encodeURI|encodeURIComponent|escape|fixed|getTime|hasOwnProperty|Infinity|indexOf|isFinite|isNaN|isPrototypeOf|join|log|lastIndexOf|Math|match|max|min|Number|Object|push|pop|print|prototype|parseFloat|parseInt|RegExp|reset|replace|String|substring|substr|sub|sup|slice|sort|shift|search|slice|splice|split|select|toString|toLowerCase|toUpperCase|toSource|unshift|unescape|untaint|valueOf|write|writeln  
+
+alert|all|anchor|anchors|area|assign|blur|button|checkbox|clearInterval|clearTimeout|clientInformation|close|closed|confirm|constructor|crypto|defaultStatus|document|element|elements|embed|embeds|event|fileUpload|focus|frame|innerHeight|innerWidth|link|location|mimeTypes|navigate|navigator|frames|frameRate|hidden|history|image|images|offscreenBuffering|open|opener|option|options|outerHeight|outerWidth|onblur|onclick|onerror|onfocus|onkeydown|onkeypress|onkeyup|onmouseover|onload|onmouseup|onmousedown|onsubmit|packages|pageXOffset|pageYOffset|parent|password|pkcs11|plugin|prompt|propertyIsEnum|radio|screenX|screenY|scroll|secure|self|status|submit|setTimeout|setInterval|taint|text|textarea|top|window
+
+
+
+
++ - * / % = == === != !== &= *= += -= &lt;= &gt;= [ ] &lt; &gt; ? . &amp; { } ( )
+
+
+
+/((\'.*?\')|(\".*?\"))/g
+123
+[1,2,3]
+
+require('plugins::highlight',function(highlight){
+	var test = document.getElementById('test');
+	var code = test.innerHTML
+	highlight({
+		element:test,
+		style:'{light}',
+		font:'font-size:14px; font-family:Consolas,Microsoft YaHei ',
+		language:'javascript'
+	})
+	
+})
+&lt;/script&gt;
+
+</pre>
+
+<pre language="css" class="css">
+* {
+	margin:0;
+	padding:0;
+	border:0;
+}
+body {
+	font:14px/16px Consolas,Microsoft YaHei;
+	border-top:solid 5px #A04334;
+	background-color:#fff;
+	line-height:18px
+}
+pre {
+	white-space:pre-wrap;
+	word-wrap:break-word;
+	padding:20px;
+	font-family:Consolas,Microsoft YaHei;
+}
+pre.css {
+	color:#f0f
+}
+.root {
+	color:#AB00BC
+}
+.comment {
+	color:#999
+}
+/* 注释*/
+	.string {
+	color:#000099
+}
+/* 字符串*/
+	.keyword {
+	color:#000099;
+	font-weight:bold
+}
+/* 关键词*/
+	.object {
+	color:#009999
+}
+/* 内置对象*/
+	.number {
+	color:#f00;
+}
+/* 数字*/
+	.regexp {
+	color:#006600;
+}
+/* 正则*/
+	.symbol {
+	color:#000099;
+}
+.bracket {
+	font-weight:bold;
+	color:#000099;
+}
+.selector {
+	color:#FF3AFF
+}
+.important {
+	color:#f00;
+	font-weight:bold;
+}
+	
+</pre>
+
+<pre language="html">
+&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;title&gt;无标题文档&lt;/title&gt;
+&lt;link rel="stylesheet" href="test.css" /&gt;
+&lt;script src="test.js"&gt;&lt;/script&gt;
+&lt;style&gt;
+.demo{ font-size:14px}
+&lt;/style&gt;
+&lt;script&gt;
+var test = function(){
+	alert(1)
+}
+&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;div class="test"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+<script src="define/sujui.js" ></script> 
+<script src="define/highlight.js" ></script>
+<script>
+require('plugins::highlight',function(highlight){
+	highlight({
+		style:'light',
+		font:'font-size:14px; font-family:Consolas,Microsoft YaHei '
+	})
+	
+})
+</script>
+</body>
+</html>
