@@ -1,4 +1,12 @@
 /* ------------------ * RESET * --------------- */
+@font-face {font-family: 'webfont';
+  src: url('//at.alicdn.com/t/hw13sya6qg2e29.eot'); /* IE9*/
+  src: url('//at.alicdn.com/t/hw13sya6qg2e29.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('//at.alicdn.com/t/hw13sya6qg2e29.woff') format('woff'), /* chrome、firefox */
+  url('//at.alicdn.com/t/hw13sya6qg2e29.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('//at.alicdn.com/t/hw13sya6qg2e29.svg#思源黑体-极细') format('svg'); /* iOS 4.1- */
+}
+
 html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}
 html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;vertical-align:baseline;background:transparent; font-size:100%}
 article,aside,dialog,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;}
